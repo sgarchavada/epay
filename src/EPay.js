@@ -44,7 +44,8 @@ export const EPay = (props) => {
 		outline: 'none',
 		'box-shadow': '10px lightblue',
     'max-height': detectMob() ? '100vh' : '900px',
-    'border-left': '1px solid lightgray',
+    'border-left': '1px solid #F3F0F0',
+    'border-right': '1px solid #F3F0F0',
 		'z-index': 1000, // Ensure the modal is on top of other elements
 	};
 
