@@ -55,7 +55,7 @@ export const EPay = (props) => {
     <div style={style} id="epay-comp">
       <iframe
         className="epay-iframe"
-        src={`https://epay-next.vercel.app?url=${merchantURL}`}
+        src={`http://localhost:3000?url=${merchantURL}`}
         width="100%"
         height="100%"
         frameBorder={0}
