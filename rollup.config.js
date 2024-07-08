@@ -32,5 +32,5 @@ export default {
     }),
     terser(), // Minifies the bundle
   ],
-  external: ['react', 'react-dom'],
+ // external: ['react', 'react-dom'],
 };
