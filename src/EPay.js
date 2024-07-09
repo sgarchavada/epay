@@ -42,6 +42,7 @@ export const EPay = (props) => {
     height: '100%',
     background: 'rgba(0, 0, 0, 0.5)',
     zIndex: 999,
+    overflow: 'hidden',
   };
 
   const style = {
@@ -52,13 +53,12 @@ export const EPay = (props) => {
     width: detectMob() ? '100vw' : '400px',
     height: '100vh',
     outline: 'none',
-    'box-shadow': '10px lightblue',
-    'max-height': detectMob() ? '100vh' : '900px',
+    boxShadow: '10px 10px 20px rgba(0, 0, 0, 0.2)',
+    maxHeight: detectMob() ? '100vh' : '90%',
     'border-left': '1px solid #F3F0F0',
     'border-right': '1px solid #F3F0F0',
     'z-index': 1000, // Ensure the modal is on top of other elements,
     overflow: 'auto',
-    padding: detectMob() ? '0px' : '20px'
   };
 
   const merchantURL = window.location.origin;
@@ -77,8 +77,9 @@ export const EPay = (props) => {
 
   return ReactDOM.createPortal(
     <>
-      <div style={overlayStyle}></div>
+     
       {modalContent}
+      <div style={overlayStyle}></div>
     </>,
     document.body // Render the modal into the body element
   );
