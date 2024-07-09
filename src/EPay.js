@@ -42,6 +42,7 @@ export const EPay = (props) => {
 		width: detectMob() ? '100vw' : '400px',
 		height: '100vh',
 		outline: 'none',
+    backgroundColor: '#00000060',
 		'box-shadow': '10px lightblue',
     'max-height': detectMob() ? '100vh' : '900px',
     'border-left': '1px solid #F3F0F0',
