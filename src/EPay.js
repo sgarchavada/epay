@@ -58,6 +58,7 @@ export const EPay = (props) => {
     'border-right': '1px solid #F3F0F0',
     'z-index': 1000, // Ensure the modal is on top of other elements,
     overflow: 'auto',
+    padding: detectMob() ? '0px' : '20px'
   };
 
   const merchantURL = window.location.origin;
