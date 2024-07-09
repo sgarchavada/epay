@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { useEffect } from "react";
 
 export const EPay = (props) => {
-	const {open, onClose} = props;
+  const { open, onClose } = props;
 
   const detectMob = () => {
     const toMatch = [
@@ -18,8 +18,8 @@ export const EPay = (props) => {
       return navigator.userAgent.match(toMatchItem);
     });
   }
-  
-	useEffect(() => {
+
+  useEffect(() => {
     function handleMessage(event) {
       if (event.data === 'closeModal') {
         onClose();
@@ -32,26 +32,37 @@ export const EPay = (props) => {
     };
   }, [onClose]);
 
-	if (!open) return null;
+  if (!open) return null;
+
+  const overlayStyle = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 999,
+  };
 
   const style = {
-		position: 'fixed',
-		top: '0',
-		left: '50%',
-		transform: 'translate(-50%, -0%)',
-		width: detectMob() ? '100vw' : '400px',
-		height: '100vh',
-		outline: 'none',
-		'box-shadow': '10px lightblue',
+    position: 'fixed',
+    top: '0',
+    left: '50%',
+    transform: 'translate(-50%, -0%)',
+    width: detectMob() ? '100vw' : '400px',
+    height: '100vh',
+    outline: 'none',
+    'box-shadow': '10px lightblue',
     'max-height': detectMob() ? '100vh' : '900px',
     'border-left': '1px solid #F3F0F0',
     'border-right': '1px solid #F3F0F0',
-		'z-index': 1001, // Ensure the modal is on top of other elements
-	};
+    'z-index': 1000, // Ensure the modal is on top of other elements,
+    overflow: 'auto',
+  };
 
-	const merchantURL = window.location.origin; 
+  const merchantURL = window.location.origin;
 
-	const modalContent = (
+  const modalContent = (
     <div style={style} id="epay-comp">
       <iframe
         className="epay-iframe"
@@ -65,17 +76,9 @@ export const EPay = (props) => {
 
   return ReactDOM.createPortal(
     <>
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      background: 'rgba(0, 0, 0, 0.5)',
-      zIndex: 1000, // Below the modal
-    }} />
-    {modalContent}
-  </>,
+      <div style={overlayStyle}></div>
+      {modalContent}
+    </>,
     document.body // Render the modal into the body element
   );
 }
