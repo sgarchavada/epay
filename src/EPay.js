@@ -47,7 +47,7 @@ export const EPay = (props) => {
 
   const style = {
     position: 'fixed',
-    top: '0',
+    top: detectMob() ? '0' : '5%',
     left: '50%',
     transform: 'translate(-50%, -0%)',
     width: detectMob() ? '100vw' : '400px',
