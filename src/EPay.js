@@ -26,23 +26,54 @@ export const EPay = (props) => {
       }
     }
 
+    const blurStyle = `
+    body.blur *:not(#epay-comp) {
+      filter: blur(5px);
+      transition: filter 0.3s ease-in-out;
+    }
+  `;
+
+  if (open) {
+    document.body.classList.add('blur');
+    const styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = blurStyle;
+    styleSheet.id = "blur-style";
+    document.head.appendChild(styleSheet);
+  } else {
+    document.body.classList.remove('blur');
+    const styleSheet = document.getElementById("blur-style");
+    if (styleSheet) {
+      document.head.removeChild(styleSheet);
+    }
+  }
+
+
     window.addEventListener('message', handleMessage);
     return () => {
       window.removeEventListener('message', handleMessage);
+      document.body.classList.remove('blur');
+      const styleSheet = document.getElementById("blur-style");
+      if (styleSheet) {
+        document.head.removeChild(styleSheet);
+      }
     };
   }, [onClose]);
 
 	if (!open) return null;
 
   const style = {
-    position: 'absolute',
-		display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-		width: '100vw',
+		position: 'fixed',
+		top: '0',
+		left: '50%',
+		transform: 'translate(-50%, -0%)',
+		width: detectMob() ? '100vw' : '400px',
 		height: '100vh',
 		outline: 'none',
-    backgroundColor: '#00000020',
+		'box-shadow': '10px lightblue',
+    'max-height': detectMob() ? '100vh' : '900px',
+    'border-left': '1px solid #F3F0F0',
+    'border-right': '1px solid #F3F0F0',
 		'z-index': 1000, // Ensure the modal is on top of other elements
 	};
 
@@ -53,7 +84,7 @@ export const EPay = (props) => {
       <iframe
         className="epay-iframe"
         src={`http://localhost:3000?url=${merchantURL}`}
-        width={detectMob() ? '100vw' : '400px'}
+        width="100%"
         height="100%"
         frameBorder={0}
       />
