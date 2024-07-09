@@ -35,13 +35,14 @@ export const EPay = (props) => {
 	if (!open) return null;
 
   const style = {
+    position: 'absolute',
 		display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
 		width: '100vw',
 		height: '100vh',
 		outline: 'none',
-    backgroundColor: '#00000060',
+    backgroundColor: '#00000020',
 		'z-index': 1000, // Ensure the modal is on top of other elements
 	};
 
