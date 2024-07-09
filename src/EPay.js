@@ -26,37 +26,9 @@ export const EPay = (props) => {
       }
     }
 
-    const blurStyle = `
-    body.blur *:not(#epay-comp) {
-      filter: blur(5px);
-      transition: filter 0.3s ease-in-out;
-    }
-  `;
-
-  if (open) {
-    document.body.classList.add('blur');
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = blurStyle;
-    styleSheet.id = "blur-style";
-    document.head.appendChild(styleSheet);
-  } else {
-    document.body.classList.remove('blur');
-    const styleSheet = document.getElementById("blur-style");
-    if (styleSheet) {
-      document.head.removeChild(styleSheet);
-    }
-  }
-
-
     window.addEventListener('message', handleMessage);
     return () => {
       window.removeEventListener('message', handleMessage);
-      document.body.classList.remove('blur');
-      const styleSheet = document.getElementById("blur-style");
-      if (styleSheet) {
-        document.head.removeChild(styleSheet);
-      }
     };
   }, [onClose]);
 
@@ -74,7 +46,7 @@ export const EPay = (props) => {
     'max-height': detectMob() ? '100vh' : '900px',
     'border-left': '1px solid #F3F0F0',
     'border-right': '1px solid #F3F0F0',
-		'z-index': 1000, // Ensure the modal is on top of other elements
+		'z-index': 1001, // Ensure the modal is on top of other elements
 	};
 
 	const merchantURL = window.location.origin; 
@@ -92,7 +64,18 @@ export const EPay = (props) => {
   );
 
   return ReactDOM.createPortal(
-    modalContent,
+    <>
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      background: 'rgba(0, 0, 0, 0.5)',
+      zIndex: 1000, // Below the modal
+    }} />
+    {modalContent}
+  </>,
     document.body // Render the modal into the body element
   );
 }
