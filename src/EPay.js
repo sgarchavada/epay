@@ -77,9 +77,8 @@ export const EPay = (props) => {
 
   return ReactDOM.createPortal(
     <>
-     
-      {modalContent}
       <div style={overlayStyle}></div>
+      {modalContent}
     </>,
     document.body // Render the modal into the body element
   );
